@@ -1,0 +1,9 @@
+# Mist
+.DS_Store
+
+# Dependencies
+node_modules
+
+# Build artifacts
+dist
+storybook-static
