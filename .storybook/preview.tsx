@@ -1,3 +1,4 @@
+import { Providers } from "@/components/providers/providers";
 import "@/main.css";
 
 import type { Preview } from "@storybook/react";
@@ -12,7 +13,15 @@ const preview: Preview = {
         date: /Date$/i
       }
     }
-  }
+  },
+  decorators: [
+    (Story) => (
+      // add redux provider to the app - this is also done in src/main.tsx
+      <Providers>
+        <Story />
+      </Providers>
+    )
+  ]
 };
 
 export default preview;
