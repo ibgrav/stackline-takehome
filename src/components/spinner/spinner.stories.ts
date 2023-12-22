@@ -1,19 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tag } from "./tag";
+import { Spinner } from "./spinner";
 
 const meta = {
-  component: Tag,
+  component: Spinner,
   parameters: {
     layout: "centered"
   }
-} satisfies Meta<typeof Tag>;
+} satisfies Meta<typeof Spinner>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const _Tag: Story = {
-  args: {
-    text: "This is a tag"
-  }
-};
+export const _Spinner: Story = {};

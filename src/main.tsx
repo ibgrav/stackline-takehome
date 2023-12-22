@@ -3,16 +3,17 @@ import "./main.css";
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { App } from "@/components/app/app";
-import { Providers } from "./components/providers/providers";
+import { Provider as ReduxProvider } from "react-redux";
+import { store } from "./store/store";
+import { App } from "./components/app/app";
 
 // defined in /index.html
 const root = document.getElementById("root")!;
 
 createRoot(root).render(
   <StrictMode>
-    <Providers>
+    <ReduxProvider store={store}>
       <App />
-    </Providers>
+    </ReduxProvider>
   </StrictMode>
 );

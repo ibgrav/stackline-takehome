@@ -1,19 +1,14 @@
 import { Header } from "@/components/header/header";
-import { LeftRail } from "@/components/left-rail/left-rail";
-import { useGetProductsQuery } from "@/lib/hooks";
+import { Product } from "../product/product";
 
 export function App() {
-  const res = useGetProductsQuery();
-
   return (
     <>
       <Header />
 
-      <main>
-        <LeftRail image="" />
+      <main className="container pb-4 pt-12 flex items-center justify-center">
+        <Product />
       </main>
-
-      <pre>{JSON.stringify(res, null, 2)}</pre>
     </>
   );
 }

@@ -1,10 +1,10 @@
-export interface ProductReview {
+export interface ProductDataReview {
   customer: string;
   review: string;
   score: number;
 }
 
-export interface ProductSale {
+export interface ProductDataSale {
   weekEnding: string;
   retailSales: number;
   wholesaleSales: number;
@@ -12,15 +12,19 @@ export interface ProductSale {
   retailerMargin: number;
 }
 
-export interface Product {
-  id: string;
+// this was separated out to use within the left-rail component
+export interface ProductDetailsData {
   title: string;
   image: string;
   subtitle: string;
+  tags: Array<string>;
+}
+
+export interface ProductData extends ProductDetailsData {
+  id: string;
   brand: string;
-  reviews: Array<ProductReview>;
+  reviews: Array<ProductDataReview>;
   retailer: string;
   details: Array<string>;
-  tags: Array<string>;
-  sales: Array<ProductSale>;
+  sales: Array<ProductDataSale>;
 }

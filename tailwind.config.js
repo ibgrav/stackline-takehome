@@ -4,11 +4,12 @@ export default {
   theme: {
     extend: {
       container: {
-        center: true
+        center: true,
+        padding: "1rem"
+      },
+      colors: {
+        primary: "#052849"
       }
-    },
-    colors: {
-      primary: "#052849"
     }
   }
 };

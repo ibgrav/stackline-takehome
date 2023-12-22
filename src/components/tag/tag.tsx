@@ -3,5 +3,5 @@ export interface TagProps {
 }
 
 export function Tag({ text }: TagProps) {
-  return <span className="border rounded px-4 py-1">{text}</span>;
+  return <span className="border rounded px-3 py-1 text-sm whitespace-nowrap">{text}</span>;
 }
