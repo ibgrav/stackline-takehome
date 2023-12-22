@@ -6,7 +6,7 @@ import { rest } from "msw";
 import { PRODUCTS_API_PATH } from "@/lib/constants";
 import { mockProductData } from "@/components/product/product.mock";
 
-initializeMsw();
+initializeMsw({ onUnhandledRequest: () => "bypass" });
 
 const preview: Preview = {
   loaders: [mswLoader],
