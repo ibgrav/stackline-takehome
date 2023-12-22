@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-       - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2
 
       - uses: actions/cache@v3
         name: pnpm cache
@@ -38,4 +38,3 @@ jobs:
 
       - name: Deploy to AWS
         run: pnpm cdk deploy --require-approval=never
-        
