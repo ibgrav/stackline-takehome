@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ProductData } from "@/types/product";
-import { api } from "@/store/api";
+import { queryApi } from "@/store/query-api";
 
 interface ProductState {
   data: Partial<ProductData>;
@@ -13,9 +13,13 @@ const initialState: ProductState = {
 export const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    reset(state) {
+      state.data = {};
+    }
+  },
   extraReducers: (builder) => {
-    builder.addMatcher(api.endpoints.getProducts.matchFulfilled, (state, { payload }) => {
+    builder.addMatcher(queryApi.endpoints.getProducts.matchFulfilled, (state, { payload }) => {
       if (payload[0]) state.data = payload[0];
     });
   }

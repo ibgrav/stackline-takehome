@@ -1,6 +1,7 @@
-import { useGetProductsQuery } from "@/store/hooks";
-import { ProductDetails } from "./product-details/product-details";
-import { ProductGraph } from "./product-graph/product-graph";
+import { useGetProductsQuery } from "@/store/store-hooks";
+import { ProductDetails } from "../product-details/product-details";
+import { ProductGraph } from "../product-graph/product-graph";
+import { ProductTable } from "../product-table/product-table";
 import { Spinner } from "../spinner/spinner";
 
 export function Product() {
@@ -15,10 +16,12 @@ export function Product() {
   }
 
   return (
-    <section className="grid grid-cols-1 gap-4 w-full lg:grid-cols-2">
-      <ProductDetails />
+    <section className="grid grid-cols-1 gap-4 w-full lg:grid-cols-5">
+      <ProductDetails className="lg:col-start-1 lg:row-span-2" />
 
-      <ProductGraph />
+      <ProductGraph className="lg:col-start-2 lg:col-span-4" />
+
+      <ProductTable className="lg:col-start-2 lg:col-span-4" />
     </section>
   );
 }

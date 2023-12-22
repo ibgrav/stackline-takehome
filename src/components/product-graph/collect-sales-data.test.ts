@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { MONTHS_SHORT } from "@/lib/constants";
 import { collectSalesData } from "./collect-sales-data";
-import { mockProductData } from "../product.mock";
+import { mockProductData } from "../product/product.mock";
 
 test("collect sales data", () => {
   const data = collectSalesData(mockProductData.sales);

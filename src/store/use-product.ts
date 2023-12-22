@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useTypedSelector } from "./hooks";
+import { useTypedSelector } from "./store-hooks";
 
 export const useProduct = () => {
   const product = useTypedSelector((state) => state.product);

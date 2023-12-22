@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
+import { mergeConfig } from "vite";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(ts|tsx)"],
@@ -9,7 +10,14 @@ const config: StorybookConfig = {
     options: {}
   },
   docs: {
-    autodocs: true
+    autodocs: "tag"
+  },
+  viteFinal(config) {
+    return mergeConfig(config, {
+      optimizeDeps: {
+        include: ["msw-storybook-addon"]
+      }
+    });
   }
 };
 
