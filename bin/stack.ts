@@ -10,7 +10,7 @@ import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment";
 import * as cloudfrontOrigins from "aws-cdk-lib/aws-cloudfront-origins";
 
 const rootDomain = "isaac.works";
-const domainName = `stackline.${rootDomain}`;
+const stacklineDomain = `stackline.${rootDomain}`;
 
 export class Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -29,7 +29,7 @@ export class Stack extends cdk.Stack {
     });
 
     const certificate = new acm.Certificate(this, `${id}Certificate`, {
-      domainName,
+      domainName: stacklineDomain,
       validation: acm.CertificateValidation.fromDns(hostedZone)
     });
 
@@ -37,11 +37,11 @@ export class Stack extends cdk.Stack {
       defaultRootObject: "index.html",
       httpVersion: cloudfront.HttpVersion.HTTP2,
       priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
-      domainNames: [domainName],
+      domainNames: [stacklineDomain],
       certificate: certificate,
       defaultBehavior: {
         origin: new cloudfrontOrigins.S3Origin(bucket, { originAccessIdentity }),
-        allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
+        allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED
       }
@@ -49,7 +49,7 @@ export class Stack extends cdk.Stack {
 
     new route53.ARecord(this, `${id}ARecord`, {
       zone: hostedZone,
-      recordName: domainName,
+      recordName: stacklineDomain,
       target: route53.RecordTarget.fromAlias(new route53Targets.CloudFrontTarget(distribution))
     });
 
