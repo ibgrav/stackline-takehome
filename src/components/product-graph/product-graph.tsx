@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
-
 import { collectSalesData } from "./collect-sales-data";
 import { useProduct } from "@/store/use-product";
 import { cn } from "@/lib/cn";
@@ -37,7 +36,7 @@ export function ProductGraph({ className }: ProductGraphProps) {
             isAnimationActive={false}
           />
           <YAxis width={0} domain={([, max]) => [0 - max, max * 2]} />
-          <XAxis dataKey="month" type="category" />
+          <XAxis dataKey="month" type="category" tickLine={false} stroke="rgb(156,163,175)" tickMargin={12} />
         </LineChart>
       </ResponsiveContainer>
     </div>
