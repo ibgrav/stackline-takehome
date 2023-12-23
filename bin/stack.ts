@@ -9,9 +9,9 @@ export class Stack extends cdk.Stack {
     super(scope, id, props);
 
     const bucket = new s3.Bucket(this, `${id}Bucket`, {
-      // accessControl: s3.BucketAccessControl.PUBLIC_READ,
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
-      websiteIndexDocument: "index.html"
+      publicReadAccess: true,
+      websiteIndexDocument: "index.html",
+      removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
     new s3Deployment.BucketDeployment(this, `${id}BucketDeployment`, {
