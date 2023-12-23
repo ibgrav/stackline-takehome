@@ -28,15 +28,15 @@ export class Stack extends cdk.Stack {
 
     const distribution = new cloudfront.Distribution(this, `${id}Distribution`, {
       defaultRootObject: "index.html",
-      httpVersion: cloudfront.HttpVersion.HTTP2,
-      priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
+      // httpVersion: cloudfront.HttpVersion.HTTP2,
+      // priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
       domainNames: [domainName],
       certificate: certificate,
       defaultBehavior: {
-        origin: new cloudfrontOrigins.S3Origin(bucket, { originAccessIdentity }),
-        allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
-        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED
+        origin: new cloudfrontOrigins.S3Origin(bucket, { originAccessIdentity })
+        // allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
+        // viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        // cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED
       }
     });
 
