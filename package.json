@@ -24,6 +24,7 @@
     "recharts": "2.10.3"
   },
   "devDependencies": {
+    "@fontsource/roboto-condensed": "5.0.14",
     "@storybook/addon-essentials": "7.6.6",
     "@storybook/addon-interactions": "7.6.6",
     "@storybook/react": "7.6.6",
@@ -46,6 +47,7 @@
     "msw": "1",
     "msw-storybook-addon": "1.10.0",
     "postcss": "8.4.32",
+    "postcss-import": "15.1.0",
     "prettier": "3.1.1",
     "storybook": "7.6.6",
     "tailwindcss": "3.4.0",
