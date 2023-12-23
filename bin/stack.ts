@@ -8,7 +8,8 @@ import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment";
 import * as cloudfrontOrigins from "aws-cdk-lib/aws-cloudfront-origins";
 
-const domainName = "stackline.isaac.works";
+const zoneName = "isaac.works";
+const domainName = `stackline.${zoneName}`;
 
 export class Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -28,11 +29,11 @@ export class Stack extends cdk.Stack {
     bucket.grantRead(originAccessIdentity);
 
     const hostedZone = new route53.PublicHostedZone(this, `${id}HostedZone`, {
-      zoneName: domainName
+      zoneName
     });
 
     const certificate = new acm.Certificate(this, `${id}Certificate`, {
-      domainName: domainName,
+      domainName,
       validation: acm.CertificateValidation.fromDns(hostedZone)
     });
 
