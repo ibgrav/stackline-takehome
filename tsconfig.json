@@ -1,7 +1,7 @@
 {
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.cjs", ".storybook/**/*.ts", ".storybook/**/*.tsx"],
 
-  "exclude": ["node_modules", "storybook_static", "dist"],
+  "exclude": ["node_modules", "storybook_static", "dist", "cdk.out"],
 
   "compilerOptions": {
     "baseUrl": ".",

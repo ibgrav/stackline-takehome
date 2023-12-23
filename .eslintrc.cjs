@@ -3,7 +3,7 @@ module.exports = {
 
   env: { browser: true, es2020: true },
 
-  ignorePatterns: ["dist", ".eslintrc.cjs", "storybook-static"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "storybook-static", "cdk.out"],
 
   parser: "@typescript-eslint/parser",
 
