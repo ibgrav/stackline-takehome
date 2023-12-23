@@ -1,5 +1,7 @@
 import { ProductData } from "@/types/product";
 
+// this mock data is created for testing purposes
+// integration tests could be created to test the actual api endpoints
 export const mockProductData: ProductData = {
   id: "B007TIE0GQ",
   title: "Shark Ninja",

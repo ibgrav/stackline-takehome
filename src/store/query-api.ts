@@ -7,6 +7,7 @@ export const queryApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
   endpoints: (builder) => ({
     getProducts: builder.query<Array<ProductData>, void>({
+      // api paths are defined as constands to be shared with testing libraries
       query: () => PRODUCTS_API_PATH
     })
   })

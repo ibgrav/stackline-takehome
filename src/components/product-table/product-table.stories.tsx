@@ -6,8 +6,8 @@ import { renderGetProductsQuery } from ".storybook/renderers";
 const meta = {
   title: "Product Table",
   component: ProductTable,
-  decorators: [reduxDecorator],
-  render: renderGetProductsQuery(ProductTable)
+  decorators: [reduxDecorator], // reduxDecorator is required for any consumer of redux hooks/state
+  render: renderGetProductsQuery(ProductTable) // renderGetProductsQuery required for any consumer of the product slice
 } satisfies Meta<typeof ProductTable>;
 
 export default meta;

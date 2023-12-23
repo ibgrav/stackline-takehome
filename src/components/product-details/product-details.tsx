@@ -6,6 +6,7 @@ interface ProductDetailsProps {
   className?: string;
 }
 
+// todo: add better handling of missing api data
 export function ProductDetails({ className }: ProductDetailsProps) {
   const { data } = useTypedSelector((state) => state.product);
 

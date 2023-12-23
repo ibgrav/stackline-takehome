@@ -7,43 +7,44 @@ import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment";
 import * as cloudfrontOrigins from "aws-cdk-lib/aws-cloudfront-origins";
 
-const domainName = `stackline.isaac.works`;
+// the production deployment domain name
+const domainName = "stackline.isaac.works";
 
 export class Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const bucket = new s3.Bucket(this, `${id}Bucket`, {
-      removalPolicy: cdk.RemovalPolicy.DESTROY
-    });
+    // s3 bucket to hold the static assets
+    const bucket = new s3.Bucket(this, `${id}Bucket`);
 
+    // allow cloudfront to access the private bucket
     const originAccessIdentity = new cloudfront.OriginAccessIdentity(this, `${id}OriginAccessIdentity`);
 
+    // apply the identity to the bucket
     bucket.grantRead(originAccessIdentity);
 
+    // create a certificate to allow https access to the custom domain
     const certificate = new acm.Certificate(this, `${id}Certificate`, {
       domainName,
       validation: acm.CertificateValidation.fromDns()
     });
 
+    // create a cloudfront CDN distribution for best caching performance
     const distribution = new cloudfront.Distribution(this, `${id}Distribution`, {
       defaultRootObject: "index.html",
-      // httpVersion: cloudfront.HttpVersion.HTTP2,
-      // priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
       domainNames: [domainName],
       certificate: certificate,
       defaultBehavior: {
         origin: new cloudfrontOrigins.S3Origin(bucket, { originAccessIdentity })
-        // allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
-        // viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        // cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED
       }
     });
 
+    // deploy the built assets to the s3 bucket
     new s3Deployment.BucketDeployment(this, `${id}BucketDeployment`, {
       sources: [s3Deployment.Source.asset(resolve(process.cwd(), "dist"))],
       destinationBucket: bucket,
       distribution,
+      // these paths will be invalidated in the distribution when the deployment is complete
       distributionPaths: ["/index.html"]
     });
   }

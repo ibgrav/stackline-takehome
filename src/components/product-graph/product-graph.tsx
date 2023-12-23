@@ -10,7 +10,7 @@ interface ProductGraphProps {
 
 export function ProductGraph({ className }: ProductGraphProps) {
   const { data } = useTypedSelector((state) => state.product);
-
+  // only recalculate slaes data when api data changes
   const salesData = useMemo(() => collectSalesData(data.sales), [data]);
 
   return (
@@ -18,6 +18,7 @@ export function ProductGraph({ className }: ProductGraphProps) {
       <label>Retail Sales</label>
 
       <div className="w-full overflow-scroll pb-4">
+        {/* will allow scrolling chart on smaller screens */}
         <ResponsiveContainer height={500} minWidth={690}>
           <LineChart data={salesData} margin={{ left: 20, right: 20 }}>
             <Line
@@ -26,6 +27,7 @@ export function ProductGraph({ className }: ProductGraphProps) {
               stroke="rgb(55,147,244)"
               strokeWidth={3}
               dot={false}
+              // could allow animations with a usePreferReducedMotion = false hook
               isAnimationActive={false}
             />
             <Line
@@ -36,6 +38,7 @@ export function ProductGraph({ className }: ProductGraphProps) {
               dot={false}
               isAnimationActive={false}
             />
+            {/* setting a negative min with a 2x max centers the lines */}
             <YAxis width={0} domain={([, max]) => [0 - max, max * 2]} />
             <XAxis dataKey="month" type="category" tickLine={false} stroke="rgb(156,163,175)" tickMargin={12} />
           </LineChart>

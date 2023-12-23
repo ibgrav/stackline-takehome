@@ -2,6 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* prefer this over using google font link tags due to better cachine for font files */
 @import "@fontsource/roboto-condensed/400.css";
 @import "@fontsource/roboto-condensed/700.css";
 @import "@fontsource/roboto-condensed/900.css";

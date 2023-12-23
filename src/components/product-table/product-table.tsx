@@ -11,34 +11,36 @@ import {
   getSortedRowModel,
   useReactTable
 } from "@tanstack/react-table";
-
-type ColumnMeta = {
-  align: string;
-};
+import { formatDateNum } from "./format-date-num";
 
 const columnHelper = createColumnHelper<ProductDataSale>();
 
+// some data types require left vs. right alignment (such as dates)
+type ColumnMeta = {
+  align: string;
+};
 function getColumnTextAlign(column: Column<ProductDataSale>) {
   return (column.columnDef.meta as ColumnMeta | undefined)?.align ?? "text-right";
 }
-
-const format = (num: number): string => {
-  if (num > 999) return num.toString().substring(2);
-  if (num < 10) return `0${num}`;
-  return num.toString();
-};
 
 const columns = [
   columnHelper.accessor("weekEnding", {
     header: "WEEK ENDING",
     meta: { align: "text-left" } satisfies ColumnMeta,
     cell: (info) => {
-      const date = new Date(info.getValue());
-      return `${format(date.getMonth() + 1)}-${format(date.getDate())}-${format(date.getFullYear())}`;
+      try {
+        const date = new Date(info.getValue());
+        return `${formatDateNum(date.getMonth() + 1)}-${formatDateNum(date.getDate())}-${formatDateNum(date.getFullYear())}`;
+      } catch (e) {
+        console.error(e);
+        // todo: better error handling of an invalid date
+        return "";
+      }
     }
   }),
   columnHelper.accessor("retailSales", {
     header: "RETAIL SALES",
+    // to local string allows for nicer formatting of numbers
     cell: (info) => `$${info.getValue().toLocaleString()}`
   }),
   columnHelper.accessor("wholesaleSales", {
@@ -75,6 +77,7 @@ export function ProductTable({ className }: ProductTableProps) {
 
   return (
     <div className={cn("shadow px-4 w-full overflow-scroll", className)}>
+      {/* scroll on smaller screens to keep table data readable */}
       <table className="w-full text-sm min-w-[690px]">
         <thead className="h-16">
           {table.getHeaderGroups().map((headerGroup) => (
@@ -100,13 +103,11 @@ export function ProductTable({ className }: ProductTableProps) {
         <tbody className="text-gray-400 font-mono">
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className={cn("border-t h-12")}>
-              {row.getVisibleCells().map((cell) => {
-                return (
-                  <td key={cell.id} className={getColumnTextAlign(cell.column)}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                );
-              })}
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className={getColumnTextAlign(cell.column)}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>

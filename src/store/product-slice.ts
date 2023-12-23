@@ -13,12 +13,10 @@ const initialState: ProductState = {
 export const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {
-    reset(state) {
-      state.data = {};
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
+    // allow any child component to consume the api data without worry of duplicate network requests
+    // requires a parent to call useGetProductsQuery
     builder.addMatcher(queryApi.endpoints.getProducts.matchFulfilled, (state, { payload }) => {
       if (payload[0]) state.data = payload[0];
     });

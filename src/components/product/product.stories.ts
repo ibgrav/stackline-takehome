@@ -18,10 +18,13 @@ export const Default: Story = {
 };
 
 export const Error: Story = {
+  // using separate story decorators that both call `createStore` allows for separate state between stories
+  // otherwise, when Default is renders, the Error story will show a success response because the store has already been populated
   decorators: [reduxDecorator],
   parameters: {
     msw: {
       handlers: [
+        // overrite the default mock handler to return an error response
         rest.get(`/api/${PRODUCTS_API_PATH}`, (_, res, ctx) => {
           return res(ctx.status(500));
         })

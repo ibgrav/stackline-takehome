@@ -1,3 +1,6 @@
+// isolated types for the product data
+// if a node.js backend environment is created, isolating these types allows easy sharing between the frontend and backend
+
 export interface ProductDataReview {
   customer: string;
   review: string;
