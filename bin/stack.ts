@@ -18,11 +18,6 @@ export class Stack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
-    new s3Deployment.BucketDeployment(this, `${id}BucketDeployment`, {
-      destinationBucket: bucket,
-      sources: [s3Deployment.Source.asset(resolve(process.cwd(), "dist"))]
-    });
-
     const originAccessIdentity = new cloudfront.OriginAccessIdentity(this, `${id}OriginAccessIdentity`);
 
     bucket.grantRead(originAccessIdentity);
@@ -36,7 +31,7 @@ export class Stack extends cdk.Stack {
       validation: acm.CertificateValidation.fromDns(hostedZone)
     });
 
-    new cloudfront.Distribution(this, `${id}Distribution`, {
+    const distribution = new cloudfront.Distribution(this, `${id}Distribution`, {
       defaultRootObject: "index.html",
       httpVersion: cloudfront.HttpVersion.HTTP2,
       priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
@@ -48,6 +43,13 @@ export class Stack extends cdk.Stack {
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED
       }
+    });
+
+    new s3Deployment.BucketDeployment(this, `${id}BucketDeployment`, {
+      sources: [s3Deployment.Source.asset(resolve(process.cwd(), "dist"))],
+      destinationBucket: bucket,
+      distribution,
+      distributionPaths: ["/index.html"]
     });
   }
 }
