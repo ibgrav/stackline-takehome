@@ -4,8 +4,6 @@
 
 - This site is deployed to an s3 bucket using AWS CDK (./bin/cdk.ts)
 - A CloudFront distribution is configured to serve the s3 bucket
-- The CloudFront distribution is configured to use a custom domain name
-- A CName record has been added to the DNS config for [stackline.isaac.works](https://stackline.isaac.works)
 
 ## Local Development
 
