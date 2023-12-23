@@ -9,8 +9,6 @@ interface ProductDetailsProps {
 export function ProductDetails({ className }: ProductDetailsProps) {
   const data = useProduct();
 
-  console.log("data", data);
-
   return (
     <div className={cn("shadow", className)}>
       <div className="border-b p-4 text-center flex flex-col gap-2 items-center justify-center">

@@ -11,7 +11,6 @@ export class Stack extends cdk.Stack {
     super(scope, id, props);
 
     const bucket = new s3.Bucket(this, `${id}Bucket`, {
-      websiteIndexDocument: "index.html",
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
@@ -26,6 +25,8 @@ export class Stack extends cdk.Stack {
 
     new cloudfront.Distribution(this, `${id}Distribution`, {
       defaultRootObject: "index.html",
+      httpVersion: cloudfront.HttpVersion.HTTP2,
+      priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
       defaultBehavior: {
         origin: new cloudfrontOrigins.S3Origin(bucket, { originAccessIdentity })
       }
