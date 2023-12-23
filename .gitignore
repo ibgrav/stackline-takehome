@@ -8,3 +8,4 @@ node_modules
 dist
 storybook-static
 cdk.out
+cdk.context.json
