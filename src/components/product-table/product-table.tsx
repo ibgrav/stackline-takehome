@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { cn } from "@/lib/cn";
-import { useProduct } from "@/store/use-product";
+import { useTypedSelector } from "@/store/store-hooks";
 import { ProductDataSale } from "@/types/product";
 import {
   Column,
@@ -10,7 +11,6 @@ import {
   getSortedRowModel,
   useReactTable
 } from "@tanstack/react-table";
-import { useState } from "react";
 
 type ColumnMeta = {
   align: string;
@@ -60,9 +60,9 @@ interface ProductTableProps {
 }
 
 export function ProductTable({ className }: ProductTableProps) {
-  const [sorting, setSorting] = useState<SortingState>([{ id: "weekEnding", desc: false }]);
+  const { data } = useTypedSelector((state) => state.product);
 
-  const data = useProduct();
+  const [sorting, setSorting] = useState<SortingState>([{ id: "weekEnding", desc: false }]);
 
   const table = useReactTable({
     columns,
@@ -74,8 +74,8 @@ export function ProductTable({ className }: ProductTableProps) {
   });
 
   return (
-    <div className={cn("shadow px-4", className)}>
-      <table className="w-full text-sm">
+    <div className={cn("shadow px-4 w-full overflow-scroll", className)}>
+      <table className="w-full text-sm min-w-[690px]">
         <thead className="h-16">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>

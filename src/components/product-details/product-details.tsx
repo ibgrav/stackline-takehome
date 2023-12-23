@@ -1,13 +1,13 @@
 import { Tag } from "@/components/tag/tag";
 import { cn } from "@/lib/cn";
-import { useProduct } from "@/store/use-product";
+import { useTypedSelector } from "@/store/store-hooks";
 
 interface ProductDetailsProps {
   className?: string;
 }
 
 export function ProductDetails({ className }: ProductDetailsProps) {
-  const data = useProduct();
+  const { data } = useTypedSelector((state) => state.product);
 
   return (
     <div className={cn("shadow", className)}>
