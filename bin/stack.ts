@@ -2,9 +2,14 @@ import { resolve } from "node:path";
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as s3 from "aws-cdk-lib/aws-s3";
+import * as route53 from "aws-cdk-lib/aws-route53";
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
-import * as cloudfrontOrigins from "aws-cdk-lib/aws-cloudfront-origins";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment";
+import * as cloudfrontOrigins from "aws-cdk-lib/aws-cloudfront-origins";
+
+const domain = "isaac.works";
+const domainName = `stackline.${domain}`;
 
 export class Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -23,12 +28,26 @@ export class Stack extends cdk.Stack {
 
     bucket.grantRead(originAccessIdentity);
 
+    const hostedZone = new route53.PublicHostedZone(this, `${id}HostedZone`, {
+      zoneName: domain
+    });
+
+    const certificate = new acm.Certificate(this, `${id}Certificate`, {
+      domainName: domainName,
+      validation: acm.CertificateValidation.fromDns(hostedZone)
+    });
+
     new cloudfront.Distribution(this, `${id}Distribution`, {
       defaultRootObject: "index.html",
       httpVersion: cloudfront.HttpVersion.HTTP2,
       priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
+      domainNames: [domainName],
+      certificate: certificate,
       defaultBehavior: {
-        origin: new cloudfrontOrigins.S3Origin(bucket, { originAccessIdentity })
+        origin: new cloudfrontOrigins.S3Origin(bucket, { originAccessIdentity }),
+        allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
+        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED
       }
     });
   }
