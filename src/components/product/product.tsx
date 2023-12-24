@@ -17,7 +17,7 @@ export function Product() {
 
   if (isError) {
     // todo: better customer messaging on error
-    return <div className="text-red-500">An error has occured.</div>;
+    return <div className="text-red-500 text-center py-4">An error has occured. Please refresh and try again.</div>;
   }
 
   return (
