@@ -40,7 +40,7 @@ export class StorybookStack extends cdk.Stack {
       sources: [s3Deployment.Source.asset(storybookAssetDir)],
       destinationBucket: bucket,
       distribution, // invalidate all paths
-      distributionPaths: ["*"]
+      distributionPaths: ["/*"]
     });
   }
 }
