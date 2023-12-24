@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "storybook": "storybook dev -p 6006",
     "build": "vite build",
+    "build:storybook": "storybook build",
     "test": "pnpm run \"/^test:.*/\"",
     "test:tsc": "tsc",
     "test:lint": "eslint . --ext js,cjs,ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test:unit": "vitest run",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "test:storybook": "tsx bin/test-storybook.ts",
     "cdk": "cdk"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "@storybook/react": "7.6.6",
     "@storybook/react-vite": "7.6.6",
     "@storybook/test": "7.6.6",
+    "@storybook/test-runner": "0.16.0",
     "@types/node": "20.10.5",
     "@types/react": "18.2.45",
     "@types/react-dom": "18.2.18",
@@ -43,6 +45,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-react-refresh": "0.4.5",
     "eslint-plugin-storybook": "0.6.15",
+    "http-server": "14.1.1",
     "msw": "1",
     "msw-storybook-addon": "1.10.0",
     "postcss": "8.4.32",
@@ -53,7 +56,9 @@
     "tsx": "4.7.0",
     "typescript": "5.2",
     "vite": "4",
-    "vitest": "1.1.0"
+    "vitest": "1.1.0",
+    "wait-on": "7.2.0",
+    "zx": "7.2.3"
   },
   "msw": {
     "workerDirectory": ".storybook/public"

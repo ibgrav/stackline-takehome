@@ -1,5 +1,5 @@
 {
-  "app": "pnpm exec tsx bin/cdk.ts",
+  "app": "pnpm exec tsx cdk/app.ts",
   "context": {
     "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
     "@aws-cdk/core:checkSecretUsage": true,

@@ -1,8 +1,12 @@
-# [stackline.isaac.works](https://stackline.isaac.works)
+# Stackline Takehome
+
+## Public URL: [stackline.isaac.works](https://stackline.isaac.works)
+
+## Storybook URL: [stackline-storybook.isaac.works](https://stackline-storybook.isaac.works)
 
 ## Deployment
 
-- This site is deployed to an s3 bucket using AWS CDK (./bin/cdk.ts)
+- This site is deployed to an s3 bucket using AWS CDK (./cdk/app.ts)
 - A CloudFront distribution is configured to serve the s3 bucket
 - A CNAME record is configured to point to the CloudFront distribution
 
