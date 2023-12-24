@@ -43,3 +43,4 @@
 - Better developer documentation
 - Increased linting rules
 - Depending on the team, pre-commit hooks for test running and branch naming
+- Add branch protection rules, code review, and required PR checks

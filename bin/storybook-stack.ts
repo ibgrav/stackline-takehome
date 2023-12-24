@@ -14,9 +14,10 @@ export class StorybookStack extends cdk.Stack {
 
     // s3 bucket to hold the static assets
     const bucket = new s3.Bucket(this, `${id}Bucket`, {
-      publicReadAccess: true,
       websiteIndexDocument: "index.html",
-      websiteErrorDocument: "index.html"
+      websiteErrorDocument: "index.html",
+      accessControl: s3.BucketAccessControl.PUBLIC_READ,
+      objectOwnership: s3.ObjectOwnership.OBJECT_WRITER
     });
 
     // deploy the built assets to the s3 bucket
