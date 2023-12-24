@@ -39,7 +39,7 @@ jobs:
           aws-region: "us-east-1"
 
       - name: Deploy to AWS
-        run: pnpm cdk deploy --require-approval=never
+        run: pnpm cdk deploy StacklineTakehome --require-approval=never
         env:
           CDK_DEFAULT_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
           CDK_DEFAULT_REGION: "us-east-1"
