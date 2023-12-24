@@ -1,12 +1,12 @@
 import { MONTHS_SHORT } from "@/lib/constants";
 import { ProductDataSale } from "@/types/product";
 
-export function collectSalesData(sales?: Array<ProductDataSale>) {
+export function collectSalesData(sales?: ProductDataSale[]) {
   if (!sales || !Array.isArray(sales)) return [];
 
   // this is a 12-length array of [sales, margin] tuples
   // which lends itself well to month-based data
-  const data: Array<[sales: number, margin: number]> = [];
+  const data: [sales: number, margin: number][] = [];
 
   sales.forEach((sale) => {
     try {

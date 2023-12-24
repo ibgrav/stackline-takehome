@@ -16,9 +16,9 @@ import { formatDateNum } from "./format-date-num";
 const columnHelper = createColumnHelper<ProductDataSale>();
 
 // some data types require left vs. right alignment (such as dates)
-type ColumnMeta = {
+interface ColumnMeta {
   align: string;
-};
+}
 function getColumnTextAlign(column: Column<ProductDataSale>) {
   return (column.columnDef.meta as ColumnMeta | undefined)?.align ?? "text-right";
 }

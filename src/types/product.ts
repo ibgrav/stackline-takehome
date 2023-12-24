@@ -20,14 +20,14 @@ export interface ProductDetailsData {
   title: string;
   image: string;
   subtitle: string;
-  tags: Array<string>;
+  tags: string[];
 }
 
 export interface ProductData extends ProductDetailsData {
   id: string;
   brand: string;
-  reviews: Array<ProductDataReview>;
+  reviews: ProductDataReview[];
   retailer: string;
-  details: Array<string>;
-  sales: Array<ProductDataSale>;
+  details: string[];
+  sales: ProductDataSale[];
 }
