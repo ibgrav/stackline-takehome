@@ -10,7 +10,7 @@ import * as cloudfrontOrigins from "aws-cdk-lib/aws-cloudfront-origins";
 // This domain is managed outside Route53,so a CNAME record must be created manually pointing at the cloudfront distribution.
 const domainName = "stackline.isaac.works";
 
-export class Stack extends cdk.Stack {
+export class SiteStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 

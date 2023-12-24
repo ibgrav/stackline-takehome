@@ -27,8 +27,8 @@
 
 - Linting is done via `eslint`
 - Type tests are run with `tsc`
-- Unit tests are written using `vitest`
-- React testing is done using `@storybook/test`
+- Unit tests are written using `vitest` (see `src/components/product-graph/collect-sales-data.test.ts`)
+- React testing is done using `@storybook/test` (see `src/components/app/app.stories.ts`)
 - Visual regression tests can be administored through Chromatic (Storybook integration)
 - Integration tests are not included, but could be created using Cypress or (preferably) Playwright
 
@@ -39,6 +39,7 @@
   - More thoughtful `<ErrorBoundary />` components should be created to handle errors in production.
   - More thoughtful api error handling should be added to consumers of the `queryApi`.
 - The AWS environment this was deployed to is personal, and so does not have the required best-practice IAM policies for a production environment.
+- Increased accessibility, aria labels, tab order qa, etc.
 - Better developer documentation
 - Increased linting rules
 - Depending on the team, pre-commit hooks for test running and branch naming

@@ -1,3 +1,5 @@
+// redux toolkit is used as it is the recommended approach for all new redux projects
+// https://redux-toolkit.js.org/introduction/why-rtk-is-redux-today#why-we-want-you-to-use-redux-toolkit
 import { configureStore } from "@reduxjs/toolkit";
 import { queryApi } from "./query-api";
 import { productSlice } from "./product-slice";

@@ -17,6 +17,9 @@ const config: StorybookConfig = {
       optimizeDeps: {
         // additional dev-only dependencies could be added to improve dev speed
         include: ["msw-storybook-addon"]
+      },
+      build: {
+        chunkSizeWarningLimit: 1000
       }
     });
   }
