@@ -14,7 +14,8 @@ export class StorybookStack extends cdk.Stack {
 
     // public s3 bucket to serve the site
     // the bucket name must match the domain name for the CNAME to work
-    const bucket = new s3.Bucket(this, domainName, {
+    const bucket = new s3.Bucket(this, `${id}Bucket`, {
+      bucketName: domainName,
       publicReadAccess: true,
       websiteIndexDocument: "index.html",
       websiteErrorDocument: "index.html",
