@@ -7,7 +7,7 @@ import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment";
 import * as cloudfrontOrigins from "aws-cdk-lib/aws-cloudfront-origins";
 
-export const storybookAssetDir = resolve(process.cwd(), "dist");
+export const storybookAssetDir = resolve(process.cwd(), "storybook-static");
 
 const domainName = "stackline-storybook.isaac.works";
 
