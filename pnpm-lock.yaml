@@ -28,6 +28,9 @@ dependencies:
     version: 2.10.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
+  '@storybook/addon-a11y':
+    specifier: 7.6.6
+    version: 7.6.6
   '@storybook/addon-essentials':
     specifier: 7.6.6
     version: 7.6.6(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -3106,6 +3109,13 @@ packages:
       '@sinonjs/commons': 3.0.0
     dev: true
 
+  /@storybook/addon-a11y@7.6.6:
+    resolution: {integrity: sha512-D7TlxmPB4qoqN1q1WoVvRCIAB6RhDN7s0JL4qvznK3cdDDkQyfk3zvip97NhbT5ZSLjpszyElV9CfWht1O341w==}
+    dependencies:
+      '@storybook/addon-highlight': 7.6.6
+      axe-core: 4.8.3
+    dev: true
+
   /@storybook/addon-actions@7.6.6:
     resolution: {integrity: sha512-mLJip9Evb2Chj7ymKbpaybe5NgDy3Du7oSWeURPy/0qXJ2cBqHWnhZ8CTK2DasrstsUhQSJaZVXHhaENT+fn+g==}
     dependencies:
@@ -5077,6 +5087,11 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
+    dev: true
+
+  /axe-core@4.8.3:
+    resolution: {integrity: sha512-d5ZQHPSPkF9Tw+yfyDcRoUOc4g/8UloJJe5J8m4L5+c7AtDdjDLRxew/knnI4CxvtdxEUVgWz4x3OIQUIFiMfw==}
+    engines: {node: '>=4'}
     dev: true
 
   /axios@1.6.2:

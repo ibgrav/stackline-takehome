@@ -4,7 +4,7 @@ import { mergeConfig } from "vite";
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(ts|tsx)"],
   staticDirs: ["../public", "./public"], // only include the msw worker in the storybook build
-  addons: ["@storybook/addon-essentials", "@storybook/addon-interactions", "msw-storybook-addon"],
+  addons: ["@storybook/addon-essentials", "@storybook/addon-interactions", "@storybook/addon-a11y", "msw-storybook-addon"],
   framework: {
     name: "@storybook/react-vite",
     options: {}

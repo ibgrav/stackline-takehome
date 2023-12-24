@@ -25,6 +25,7 @@
     "recharts": "2.10.3"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "7.6.6",
     "@storybook/addon-essentials": "7.6.6",
     "@storybook/addon-interactions": "7.6.6",
     "@storybook/react": "7.6.6",

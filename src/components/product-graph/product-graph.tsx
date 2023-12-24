@@ -40,7 +40,7 @@ export function ProductGraph({ className }: ProductGraphProps) {
             />
             {/* setting a negative min with a 2x max centers the lines */}
             <YAxis width={0} domain={([, max]) => [0 - max, max * 2]} />
-            <XAxis dataKey="month" type="category" tickLine={false} stroke="rgb(156,163,175)" tickMargin={12} />
+            <XAxis dataKey="month" type="category" tickLine={false} stroke="rgb(107,114,128)" tickMargin={12} />
           </LineChart>
         </ResponsiveContainer>
       </div>
