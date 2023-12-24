@@ -2,7 +2,21 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* prefer this over using google font link tags due to better cachine for font files */
-@import "@fontsource/roboto-condensed/400.css";
-@import "@fontsource/roboto-condensed/700.css";
-@import "@fontsource/roboto-condensed/900.css";
+/* 
+    prefer this over using google font link tags for better caching vs cross-site resource
+    todo: add italics, bold italics, and other weights if necessary
+*/
+@font-face {
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(/assets/fonts/roboto-condensed-latin-400-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url(/assets/fonts/roboto-condensed-latin-700-normal.woff2) format("woff2");
+}
