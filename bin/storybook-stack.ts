@@ -17,7 +17,9 @@ export class StorybookStack extends cdk.Stack {
       websiteIndexDocument: "index.html",
       websiteErrorDocument: "index.html",
       publicReadAccess: true,
-      // https://github.com/aws/aws-cdk/issues/25358#issuecomment-1610732547
+      // https://github.com/aws/aws-cdk/issues/25983#issuecomment-1707121507
+      enforceSSL: true,
+      objectOwnership: s3.ObjectOwnership.OBJECT_WRITER,
       accessControl: s3.BucketAccessControl.PUBLIC_READ,
       blockPublicAccess: {
         blockPublicAcls: false,
