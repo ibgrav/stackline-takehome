@@ -32,7 +32,8 @@ export class StorybookStack extends cdk.Stack {
       domainNames: [domainName],
       certificate: certificate,
       defaultBehavior: {
-        origin: new cloudfrontOrigins.S3Origin(bucket, { originAccessIdentity })
+        origin: new cloudfrontOrigins.S3Origin(bucket, { originAccessIdentity }),
+        cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED
       }
     });
 
