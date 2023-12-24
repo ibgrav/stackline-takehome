@@ -1,9 +1,10 @@
-# Stackline Takehome
+# [stackline.isaac.works](https://stackline.isaac.works)
 
 ## Deployment
 
 - This site is deployed to an s3 bucket using AWS CDK (./bin/cdk.ts)
 - A CloudFront distribution is configured to serve the s3 bucket
+- A CNAME record is configured to point to the CloudFront distribution
 
 ## Local Development
 
@@ -38,3 +39,6 @@
   - More thoughtful `<ErrorBoundary />` components should be created to handle errors in production.
   - More thoughtful api error handling should be added to consumers of the `queryApi`.
 - The AWS environment this was deployed to is personal, and so does not have the required best-practice IAM policies for a production environment.
+- Better developer documentation
+- Increased linting rules
+- Depending on the team, pre-commit hooks for test running and branch naming

@@ -3,8 +3,12 @@ import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment";
 import * as cloudfrontOrigins from "aws-cdk-lib/aws-cloudfront-origins";
+
+// This domain is managed outside Route53,so a CNAME record must be created manually pointing at the cloudfront distribution.
+const domainName = "stackline.isaac.works";
 
 export class Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -19,9 +23,17 @@ export class Stack extends cdk.Stack {
     // apply the identity to the bucket
     bucket.grantRead(originAccessIdentity);
 
-    // create a cloudfront CDN distribution for public access
+    // create a certificate to allow https access to the custom domain
+    const certificate = new acm.Certificate(this, `${id}Certificate`, {
+      domainName,
+      validation: acm.CertificateValidation.fromDns()
+    });
+
+    // create a cloudfront CDN distribution for best caching performance
     const distribution = new cloudfront.Distribution(this, `${id}Distribution`, {
       defaultRootObject: "index.html",
+      domainNames: [domainName],
+      certificate: certificate,
       defaultBehavior: {
         origin: new cloudfrontOrigins.S3Origin(bucket, { originAccessIdentity })
       }
