@@ -4,7 +4,7 @@ import { Construct } from "constructs";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment";
 
-// const domainName = "stackline-storybook.isaac.works";
+const domainName = "stackline-storybook.isaac.works";
 
 export const storybookAssetDir = resolve(process.cwd(), "storybook-static");
 
@@ -13,7 +13,8 @@ export class StorybookStack extends cdk.Stack {
     super(scope, id, props);
 
     // public s3 bucket to serve the site
-    const bucket = new s3.Bucket(this, `${id}Bucket`, {
+    // the bucket name must match the domain name for the CNAME to work
+    const bucket = new s3.Bucket(this, domainName, {
       publicReadAccess: true,
       websiteIndexDocument: "index.html",
       websiteErrorDocument: "index.html",
