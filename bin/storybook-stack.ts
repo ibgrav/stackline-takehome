@@ -6,6 +6,8 @@ import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment";
 
 // const domainName = "stackline-storybook.isaac.works";
 
+export const storybookAssetDir = resolve(process.cwd(), "storybook-static");
+
 export class StorybookStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -19,7 +21,7 @@ export class StorybookStack extends cdk.Stack {
 
     // deploy the built assets to the s3 bucket
     new s3Deployment.BucketDeployment(this, `${id}BucketDeployment`, {
-      sources: [s3Deployment.Source.asset(resolve(process.cwd(), "storybook-static"))],
+      sources: [s3Deployment.Source.asset(storybookAssetDir)],
       destinationBucket: bucket
     });
   }

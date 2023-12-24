@@ -7,6 +7,8 @@ import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment";
 import * as cloudfrontOrigins from "aws-cdk-lib/aws-cloudfront-origins";
 
+export const siteAssetDir = resolve(process.cwd(), "dist");
+
 // This domain is managed outside Route53,so a CNAME record must be created manually pointing at the cloudfront distribution.
 const domainName = "stackline.isaac.works";
 
@@ -41,7 +43,7 @@ export class SiteStack extends cdk.Stack {
 
     // deploy the built assets to the s3 bucket
     new s3Deployment.BucketDeployment(this, `${id}BucketDeployment`, {
-      sources: [s3Deployment.Source.asset(resolve(process.cwd(), "dist"))],
+      sources: [s3Deployment.Source.asset(siteAssetDir)],
       destinationBucket: bucket,
       distribution,
       // these paths will be invalidated in the distribution when the deployment is complete
