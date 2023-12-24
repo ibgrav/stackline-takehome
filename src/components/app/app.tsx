@@ -6,7 +6,7 @@ export function App() {
     <>
       <Header />
 
-      <main className="px-4 pb-4 pt-12 flex justify-center">
+      <main className="container pb-4 pt-12 flex justify-center">
         <Product />
       </main>
     </>
