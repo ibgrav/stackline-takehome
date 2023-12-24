@@ -16,8 +16,15 @@ export class StorybookStack extends cdk.Stack {
     const bucket = new s3.Bucket(this, `${id}Bucket`, {
       websiteIndexDocument: "index.html",
       websiteErrorDocument: "index.html",
+      publicReadAccess: true,
+      // https://github.com/aws/aws-cdk/issues/25358#issuecomment-1610732547
       accessControl: s3.BucketAccessControl.PUBLIC_READ,
-      objectOwnership: s3.ObjectOwnership.OBJECT_WRITER
+      blockPublicAccess: {
+        blockPublicAcls: false,
+        ignorePublicAcls: false,
+        blockPublicPolicy: false,
+        restrictPublicBuckets: false
+      }
     });
 
     // deploy the built assets to the s3 bucket
