@@ -1,4 +1,4 @@
-// we want 00-00-00 date formate
+// we want 00-00-00 date format
 export function formatDateNum(num: number): string {
   const str = num.toString();
 

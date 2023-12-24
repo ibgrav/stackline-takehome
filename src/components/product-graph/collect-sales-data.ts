@@ -4,8 +4,7 @@ import { ProductDataSale } from "@/types/product";
 export function collectSalesData(sales?: ProductDataSale[]) {
   if (!sales || !Array.isArray(sales)) return [];
 
-  // this is a 12-length array of [sales, margin] tuples
-  // which lends itself well to month-based data
+  // this will be a 12-length array of [sales, margin] tuples
   const data: [sales: number, margin: number][] = [];
 
   sales.forEach((sale) => {

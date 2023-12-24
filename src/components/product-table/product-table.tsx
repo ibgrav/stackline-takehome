@@ -1,61 +1,8 @@
 import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { useTypedSelector } from "@/store/store-hooks";
-import { ProductDataSale } from "@/types/product";
-import {
-  Column,
-  SortingState,
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable
-} from "@tanstack/react-table";
-import { formatDateNum } from "./format-date-num";
-
-const columnHelper = createColumnHelper<ProductDataSale>();
-
-// some data types require left vs. right alignment (such as dates)
-interface ColumnMeta {
-  align: string;
-}
-function getColumnTextAlign(column: Column<ProductDataSale>) {
-  return (column.columnDef.meta as ColumnMeta | undefined)?.align ?? "text-right";
-}
-
-const columns = [
-  columnHelper.accessor("weekEnding", {
-    header: "WEEK ENDING",
-    meta: { align: "text-left" } satisfies ColumnMeta,
-    cell: (info) => {
-      try {
-        const date = new Date(info.getValue());
-        return `${formatDateNum(date.getMonth() + 1)}-${formatDateNum(date.getDate())}-${formatDateNum(date.getFullYear())}`;
-      } catch (e) {
-        console.error(e);
-        // todo: better error handling of an invalid date
-        return "";
-      }
-    }
-  }),
-  columnHelper.accessor("retailSales", {
-    header: "RETAIL SALES",
-    // to local string allows for nicer formatting of numbers
-    cell: (info) => `$${info.getValue().toLocaleString()}`
-  }),
-  columnHelper.accessor("wholesaleSales", {
-    header: "WHOLESALE SALES",
-    cell: (info) => `$${info.getValue().toLocaleString()}`
-  }),
-  columnHelper.accessor("unitsSold", {
-    header: "UNITS SOLD",
-    cell: (info) => info.getValue().toLocaleString()
-  }),
-  columnHelper.accessor("retailerMargin", {
-    header: "RETAILER MARGIN",
-    cell: (info) => `$${info.getValue().toLocaleString()}`
-  })
-];
+import { SortingState, flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
+import { getColumnTextAlign, productTableColumns } from "./product-table-columns";
 
 interface ProductTableProps {
   className?: string;
@@ -67,7 +14,7 @@ export function ProductTable({ className }: ProductTableProps) {
   const [sorting, setSorting] = useState<SortingState>([{ id: "weekEnding", desc: false }]);
 
   const table = useReactTable({
-    columns,
+    columns: productTableColumns,
     state: { sorting },
     data: data.sales ?? [],
     onSortingChange: setSorting,

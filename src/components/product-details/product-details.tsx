@@ -18,9 +18,13 @@ export function ProductDetails({ className }: ProductDetailsProps) {
         <span className="text-sm text-gray-500">{data.subtitle}</span>
       </div>
 
-      <div className="border-b p-4 flex gap-2 flex-wrap">
-        {data.tags?.map((tag, i) => <Tag key={`${tag}-${i}`} text={tag} />)}
-      </div>
+      {data.tags && (
+        <div className="border-b p-4 flex gap-2 flex-wrap">
+          {data.tags.map((tag, i) => (
+            <Tag key={`${tag}-${i}`} text={tag} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

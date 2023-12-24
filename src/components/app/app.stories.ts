@@ -14,10 +14,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const _App: Story = {
+  // example automated interaction testing - this is not a complete test
   play: async (ctx) => {
     const canvas = within(ctx.canvasElement);
 
     const h1 = canvas.getByRole("heading", { level: 1 });
+
     await expect(h1).toHaveTextContent("Stackline Takehome");
   }
 };

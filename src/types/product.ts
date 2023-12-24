@@ -15,7 +15,7 @@ export interface ProductDataSale {
   retailerMargin: number;
 }
 
-// this was separated out to use within the left-rail component
+// this was separated out to use within the product-details component
 export interface ProductDetailsData {
   title: string;
   image: string;

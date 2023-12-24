@@ -1,5 +1,5 @@
 import { Header } from "@/components/header/header";
-import { Product } from "../product/product";
+import { Product } from "@/components/product/product";
 
 export function App() {
   return (
