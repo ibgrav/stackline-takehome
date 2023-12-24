@@ -12,21 +12,15 @@ export class StorybookStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // s3 bucket to hold the static assets
+    // public s3 bucket to serve the site
     const bucket = new s3.Bucket(this, `${id}Bucket`, {
+      publicReadAccess: true,
       websiteIndexDocument: "index.html",
       websiteErrorDocument: "index.html",
-      publicReadAccess: true,
-      // https://github.com/aws/aws-cdk/issues/25983#issuecomment-1707121507
-      enforceSSL: true,
-      objectOwnership: s3.ObjectOwnership.OBJECT_WRITER,
-      accessControl: s3.BucketAccessControl.PUBLIC_READ,
-      blockPublicAccess: {
-        blockPublicAcls: false,
-        ignorePublicAcls: false,
-        blockPublicPolicy: false,
-        restrictPublicBuckets: false
-      }
+      autoDeleteObjects: true,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ACLS,
+      accessControl: s3.BucketAccessControl.BUCKET_OWNER_FULL_CONTROL
     });
 
     // deploy the built assets to the s3 bucket
