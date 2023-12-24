@@ -100,7 +100,7 @@ export function ProductTable({ className }: ProductTableProps) {
           ))}
         </thead>
 
-        <tbody className="text-gray-400 font-mono">
+        <tbody className="text-gray-500 font-mono">
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className={cn("border-t h-12")}>
               {row.getVisibleCells().map((cell) => (
