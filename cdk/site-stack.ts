@@ -42,19 +42,20 @@ export class SiteStack extends cdk.Stack {
       }
     });
 
-    // deploy the built assets to the s3 bucket
+    // Deploy the built assets to the s3 bucket
     new s3Deployment.BucketDeployment(this, `${id}AssetDeployment`, {
-      sources: [s3Deployment.Source.asset(siteAssetDir, { exclude: ["assets/*"] })],
-      cacheControl: [s3Deployment.CacheControl.maxAge(cdk.Duration.days(0))],
+      sources: [s3Deployment.Source.asset(siteAssetDir, { exclude: ["index.html"] })],
+      // Set cache-control header for best performance
+      cacheControl: [s3Deployment.CacheControl.maxAge(cdk.Duration.days(365))],
       destinationBucket: bucket,
-      distribution,
-      prune: false
+      distribution, // add the distribution to invalidate the CDN cache on deployment
+      prune: false // required so multiple deployments do not override each other
     });
-    // two separate deployments are needed to ensure only the assets folder is browser cached
+    // Two separate deployments are needed to ensure the index.html file is not browser cached
+    // The api folder would not generally exist, but instead be served by a separate api stack, which could set its own cache-control headers
     new s3Deployment.BucketDeployment(this, `${id}MainDeployment`, {
-      sources: [s3Deployment.Source.asset(siteAssetDir, { exclude: ["*", "!assets/*"] })],
-      // set cache-control header for best performance
-      cacheControl: [s3Deployment.CacheControl.maxAge(cdk.Duration.seconds(365))],
+      sources: [s3Deployment.Source.asset(siteAssetDir, { exclude: ["*", "!index.html"] })],
+      cacheControl: [s3Deployment.CacheControl.maxAge(cdk.Duration.seconds(0))],
       destinationBucket: bucket,
       distribution,
       prune: false
