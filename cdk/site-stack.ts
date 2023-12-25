@@ -43,7 +43,7 @@ export class SiteStack extends cdk.Stack {
     });
 
     // deploy the built assets to the s3 bucket
-    new s3Deployment.BucketDeployment(this, `${id}BucketDeployment`, {
+    new s3Deployment.BucketDeployment(this, `${id}MainDeployment`, {
       sources: [s3Deployment.Source.asset(siteAssetDir, { exclude: ["*", "!assets"] })],
       // set cache-control header forwarded by cloudfront
       cacheControl: [s3Deployment.CacheControl.maxAge(cdk.Duration.seconds(365))],
@@ -51,7 +51,7 @@ export class SiteStack extends cdk.Stack {
       distribution
     });
     // two separate deployments are needed to ensure only the assets folder is browser cached
-    new s3Deployment.BucketDeployment(this, `${id}BucketDeployment`, {
+    new s3Deployment.BucketDeployment(this, `${id}AssetDeployment`, {
       sources: [s3Deployment.Source.asset(siteAssetDir, { exclude: ["assets"] })],
       cacheControl: [s3Deployment.CacheControl.maxAge(cdk.Duration.days(365))],
       destinationBucket: bucket,
