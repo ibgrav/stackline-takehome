@@ -26,7 +26,7 @@ export function ProductTable({ className }: ProductTableProps) {
     <div className={cn("shadow px-4 w-full overflow-scroll", className)}>
       {/* scroll on smaller screens to keep table data readable */}
       <table className="w-full text-sm min-w-[690px]">
-        <thead className="h-16">
+        <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -35,7 +35,7 @@ export function ProductTable({ className }: ProductTableProps) {
                 return (
                   <th
                     key={header.id}
-                    className={cn("font-normal cursor-pointer", getColumnTextAlign(header.column))}
+                    className={cn("h-16 font-normal cursor-pointer", getColumnTextAlign(header.column))}
                     onClick={header.column.getToggleSortingHandler()}
                   >
                     {flexRender(header.column.columnDef.header, header.getContext())}
