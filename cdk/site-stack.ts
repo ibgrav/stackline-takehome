@@ -55,7 +55,6 @@ export class SiteStack extends cdk.Stack {
     // The api folder would not generally exist, but instead be served by a separate api stack, which could set its own cache-control headers
     new s3Deployment.BucketDeployment(this, `${id}MainDeployment`, {
       sources: [s3Deployment.Source.asset(siteAssetDir, { exclude: ["*", "!index.html"] })],
-      cacheControl: [s3Deployment.CacheControl.maxAge(cdk.Duration.seconds(0))],
       destinationBucket: bucket,
       distribution,
       prune: false
